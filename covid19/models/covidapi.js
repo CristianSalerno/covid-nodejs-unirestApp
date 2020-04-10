@@ -1,10 +1,12 @@
 const unirest = require("unirest");
 
+const baseUrl = 'https://api.covid19api.com/'
+
 //Get all data from covid-19 Global
 const getAllCovidData = () => {
     return new Promise((resolve, reject) => {
         unirest
-            .get('https://api.covid19api.com/summary')
+            .get(baseUrl.concat('summary'))
             .then((res) => {
                 if (res != undefined)
                     resolve(res.body)
@@ -18,7 +20,7 @@ const getAllCovidData = () => {
 const getCovidDataByCountry = (pCountry) => {
     return new Promise((resolve, reject) => {
         unirest
-            .get(`https://api.covid19api.com/country/${pCountry}/status/confirmed/live`)
+            .get(baseUrl + `/country/${pCountry}/status/confirmed/live`)
             .then((res) => {
                 if (res != undefined)
                     resolve(res.body)
