@@ -1,19 +1,32 @@
 const unirest = require("unirest");
 
+//Get all data from covid-19 Global
 const getAllCovidData = () => {
-    unirest
-        .get('https://api.covid19api.com/countries')
-        .then((res) => {
-            console.log(res.body)
-        })
+    return new Promise((resolve, reject) => {
+        unirest
+            .get('https://api.covid19api.com/countries')
+            .then((res) => {
+                if (res != undefined)
+                    resolve(res.body)
+                else
+                    reject('No data found')
+            })
+    })
 }
 
+//Get By Country
 const getCovidDataByCountry = (pCountry) => {
-    unirest
-        .get(`https://api.covid19api.com/country/${pCountry}/status/confirmed/live`)
-        .then((res) => {
-            console.log(res.body)
-        })
+    return new Promise((resolve, reject) => {
+        unirest
+            .get(`https://api.covid19api.com/country/${pCountry}/status/confirmed/live`)
+            .then((res) => {
+                if (res != undefined)
+                    resolve(res.body)
+                else
+                    reject('No country data found')
+            })
+    })
+
 }
 
 module.exports = {
