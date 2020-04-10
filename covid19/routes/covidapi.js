@@ -12,7 +12,6 @@ covidApi.getCovidDataByCountry(country)
 
 router.get('/', function (req, res, next) {
     res.render('covid', { title: 'Covid-19 Data' })
-    res.send(res.body);
 });
 
 
