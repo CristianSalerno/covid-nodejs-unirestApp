@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    
+        div(class="row")
+            div(class="col-12")
+                h1(class="px-1")= "CORONAVIRUS DATA FROM:"
+                table(class="table")
+                    thead
+                        tr
+                            th= "Total confirmed"
+                            th= "Total deaths"
+                            th= "New deaths"
+                            th= "New recovered"
+                    tbody
+                        tr
+                            th= newConfirmed
+                            th= totalDeaths
+                            th= newDeaths
+                            th= newRecovered
+
+                

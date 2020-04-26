@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors')
+
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -10,6 +12,7 @@ let covidRouter = require('./routes/covidapi')
 
 var app = express();
 
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -28,6 +31,15 @@ app.use('/covid', covidRouter)
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
 
 // error handler
 app.use(function (err, req, res, next) {
